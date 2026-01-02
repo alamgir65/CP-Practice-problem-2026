@@ -33,29 +33,27 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    string s; cin>>s;
-    ll n=s.size();
-    ll preCal[n];
-    ll cnt=0;
-    for(int i=0;i<n-1;i++){
-        if(s[i]==s[i+1] && s[i]=='v'){
-            cnt++;
-        }
-        preCal[i]=cnt;
+    int n; cin>>n;
+    ll s=0;
+    vii a(n);
+    bool ok=true;
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+        s += a[i];
+        if(s<=0) ok=false;
     }
-    preCal[n-1]=preCal[n-2];
-    ll ans=0;
-    for(int i=1;i<n-1;i++){
-        if(s[i]=='o'){
-            ans += (preCal[i-1]*(preCal[n-1]-preCal[i-1]));
-        }
+    s=0;
+    for(int i=n-1;i>=0;i--){
+        s += a[i];
+        if(s<=0) ok=false;
     }
-    out(ans)
+    if(ok) yes
+    else no
 }
 love{
     Alamgir
     int t=1; 
-    // cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++){
         solve();
     }
