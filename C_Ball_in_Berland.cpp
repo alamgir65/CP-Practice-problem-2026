@@ -32,26 +32,30 @@ ll gcd(ll a, ll b){if (b == 0)return a;return gcd(b, a % b);} //__gcd
 ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
-void solve(){
-    int n,m,k; cin>>n>>m>>k;
-    int left=k-1,right=n-k;
-    if(left<right) swap(left,right);
-    int leftRem = (m/3)*2 + (m%3!=0),rightRem=(m/3);
-    int l=1,r=n;
-    int ans=1;
-    while(l<r){
-        int mid=(l+r)/2;
-        int LL=(mid-1)/2,RR=((mid-1)/2 +(mid-1)%2);
-        int need=(2*LL - 1)+RR;
-        if(RR>LL) need++;
-        if(need <= m){
-            l=mid+1;
-            ans=mid;
-        }else r=mid-1;
-    }
-    out(l)
+void solve() {
+    int a, b, k;
+    cin >> a >> b >> k;
 
+    vector<int> boys(k), girls(k);
+    vector<ll> cntBoy(a + 1, 0), cntGirl(b + 1, 0);
+
+    for (int i = 0; i < k; i++) {
+        cin >> boys[i];
+        cntBoy[boys[i]]++;
+    }
+    for (int i = 0; i < k; i++) {
+        cin >> girls[i];
+        cntGirl[girls[i]]++;
+    }
+
+    ll ans = 0;
+    for (int i = 0; i < k; i++) {
+        ans += (k - cntBoy[boys[i]] - cntGirl[girls[i]] + 1);
+    }
+
+    cout << ans/2 << '\n';
 }
+
 love{
     Alamgir
     int t=1; 
