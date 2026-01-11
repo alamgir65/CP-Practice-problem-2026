@@ -33,15 +33,38 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    ll n; cin>>n;
-    ll mn=n/6+((n%6==4)?1:0),mx=n/4;
-    if((n%6 != 0 && n%6 != 4) && (n%4!=0 && n%4!=2)) out(-1)
-    else out2(mn,mx)
+    int n,m; cin>>n>>m;
+    set<int> st;
+    vector<vector<pii>> v(1e5+2);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            int x; cin>>x;
+            st.insert(x);
+            v[x].pb({i,j});
+        }
+    }
+    ll ans=0;
+    // out("Set : ")
+    // for(auto x:st) cout<<x<<" ";
+    // nl
+    for(int x:st){
+        int k=v[x].size();
+        // cout<<"Value "<<x<<" size: "<<k<<endl;
+        for(int i=0;i<k;i++){
+            int a=v[x][i].first, b = v[x][i].second;
+            for(int j=i+1;j<k;j++){
+                int c=v[x][j].first, d = v[x][j].second;
+                ans += (abs(c-a)+abs(d-b));
+                // cout<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
+            }
+        }
+    }
+    out(ans)
 }
 love{
     Alamgir
     int t=1; 
-    cin>>t;
+    // cin>>t;
     for(int i=1;i<=t;i++){
         solve();
     }
