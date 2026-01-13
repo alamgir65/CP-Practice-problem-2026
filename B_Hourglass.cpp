@@ -33,15 +33,15 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    int a,b,c; cin>>a>>b>>c;
-    if(a<=b){
-        int ans=a-(c%b);
-        ans=max(0,ans);
-        out(ans)
-    }else{
-        if(b==c) out(b)
-        else out(c%b)
+    int s, k, m;
+    cin >> s >> k >> m;
+    int r;
+    if (s <= k) r = s;
+    else {
+        if ((m / k) % 2 == 0) r = s;
+        else r = k;
     }
+    cout << max(0, r - m % k) << '\n';
 }
 love{
     Alamgir

@@ -70,6 +70,7 @@ love
             high = (high + 1) / 2;
             steps++;
         }
+        //gg
 
         if (low <= k && k <= high)
             cout << steps << '\n';
