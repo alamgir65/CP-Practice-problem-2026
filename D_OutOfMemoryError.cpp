@@ -32,9 +32,41 @@ ll gcd(ll a, ll b){if (b == 0)return a;return gcd(b, a % b);} //__gcd
 ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
-void solve(){
-    
+void solve() {
+    int n, m, h;
+    cin >> n >> m >> h;
+
+    vii base(n);
+    for (int i = 0; i < n; i++) cin >> base[i];
+
+    vll delta(n, 0);
+    vii last(n, 0);
+
+    int reset_version = 0;
+
+    while (m--) {
+        int b, c;
+        cin >> b >> c;
+        b--;
+        if (last[b] < reset_version) {
+            delta[b] = 0;
+            last[b] = reset_version;
+        }
+        delta[b] += c;
+        if (base[b] + delta[b] > h) {
+            reset_version++;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (last[i] < reset_version)
+            cout << base[i] << " ";
+        else
+            cout << base[i] + delta[i] << " ";
+    }
+    cout << '\n';
 }
+
 love{
     Alamgir
     int t=1; 

@@ -33,7 +33,22 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    
+    int n; cin>>n;
+    string s; cin>>s;
+    string t = s;
+    sort(all(t));
+    if(s == t){
+        out("Bob")
+        return;
+    }
+    vii ans;
+    for(int i=0;i<n;i++){
+        if(s[i] != t[i]) ans.pb(i+1);
+    }
+    out("Alice")
+    out(ans.size())
+    for(auto x:ans) cout<<x<<" ";
+    nl
 }
 love{
     Alamgir

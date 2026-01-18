@@ -33,7 +33,21 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    
+    int n; cin>>n;
+    vii a(n);
+    set<int> st;
+    for(int i=0;i<n;i++) cin>>a[i],st.insert(a[i]);
+    vii tmp;
+    for(auto x:st) tmp.pb(x);
+    int m=tmp.size();
+    int mx=imin;
+    sort(all(tmp));
+    for(int i=0;i<m;i++){
+        for(int j=i;j<m;j++){
+            if(j-i == tmp[j]-tmp[i]) mx=max(mx,j-i+1);
+        }
+    }
+    out(mx)
 }
 love{
     Alamgir

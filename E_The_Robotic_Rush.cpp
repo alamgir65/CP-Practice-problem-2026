@@ -33,8 +33,60 @@ ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
 
 void solve(){
-    
+    int n,m,k; 
+    cin>>n>>m>>k;
+
+    vll a(n),b(m);
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<m;i++) cin>>b[i];
+
+    string s;
+    cin>>s;
+
+    choto(b);
+
+    vii pr(k+1,0);
+    for(int i=1;i<=k;i++){
+        pr[i]=pr[i-1]+(s[i-1]=='R'?1:-1);
+    }
+
+    unordered_map<int,int> mp;
+    mp.reserve(2*k);
+    for(int i=0;i<=k;i++){
+        if(!mp.count(pr[i])) mp[pr[i]]=i;
+    }
+
+    int mn=*min_element(all(pr));
+    int mx=*max_element(all(pr));
+
+    vii di(n,k+1);
+
+    for(int i=0;i<n;i++){
+        auto it=lower_bound(all(b),a[i]);
+        if(it!=b.end()){
+            int d=*it-a[i];
+            if(d>=mn && d<=mx) di[i]=min(di[i],mp[d]);
+        }
+        if(it!=b.begin()){
+            --it;
+            int d=*it-a[i];
+            if(d>=mn && d<=mx) di[i]=min(di[i],mp[d]);
+        }
+    }
+
+    vii df(k+2,0);
+    for(int i=0;i<n;i++){
+        if(di[i]<=k) df[di[i]]++;
+    }
+
+    int al=n;
+    for(int i=1;i<=k;i++){
+        al-=df[i];
+        cout<<al<<" ";
+    }
+    nl
 }
+
 love{
     Alamgir
     int t=1; 
