@@ -31,25 +31,31 @@ const ll MOD=1e9+7;
 ll gcd(ll a, ll b){if (b == 0)return a;return gcd(b, a % b);} //__gcd 
 ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
 bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)return false;for(int i=5;i*i<=n;i=i+6)if(n%i==0||n%(i+2)==0)return false;return true;}
-string to_binary(int n){
-    string res="";
-    while(n>0){
-        res+=(n%2==0?"0":"1");
-        n/=2;
+bool check(string s,int n){
+    int openingCount = 0;
+    for(int i=n-1;i>=0;i--){
+        if(s[i] == '(')
+            openingCount++;
+        else{
+            if(openingCount >= 2) return true;
+        }
     }
-    reverse(all(res));
-    out(res)
-    return res;
+    return false;
 }
 void solve(){
     int n; cin>>n;
-    out(to_binary(n))
-    out(to_binary(~n))
+    string s; cin>>s;
+    if(check(s,n)){
+        out(n-2)
+    }
+    else{
+        out(-1)
+    }
 }
 love{
     Alamgir
     int t=1; 
-    // cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++){
         solve();
     }

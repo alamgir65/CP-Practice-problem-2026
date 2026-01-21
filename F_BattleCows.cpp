@@ -77,6 +77,7 @@ int solve_query(int idx, int val) {
         cur = p;
     }
 
+
     xr[N + idx] = old;
     cur = (N + idx) >> 1;
     while (cur >= 1) {
@@ -90,9 +91,7 @@ int solve_query(int idx, int val) {
 void solve() {
     cin >> n >> q;
     N = 1 << n;
-
     for (int i = 0; i < N; i++) cin >> a[i];
-
     build();
 
     while (q--) {
