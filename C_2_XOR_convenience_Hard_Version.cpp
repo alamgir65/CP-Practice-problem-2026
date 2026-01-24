@@ -34,21 +34,30 @@ bool isPrime(ll n){if(n<=1)return false;if(n<=3)return true;if(n%2==0||n%3==0)re
 
 void solve(){
     int n; cin>>n;
-    int Xor = 0;
-    for(int i=1;i<=n;i++){
-        Xor ^= i;
+    if((n&(n-1)) == 0){
+        out(-1)
+        return;
     }
-    vii permutation(n+1);
-    permutation[n] = 1;
+    int Xor=0;
+    for(int i=1;i<=n;i++) Xor ^= i;
+    vii permu(n+1);
+    permu[n]=1;
     Xor ^= 1;
     for(int i=n-1;i>=2;i--){
-        permutation[i] = i^1;
-        Xor ^= permutation[i];
+        permu[i] = i^1;
+        Xor ^= permu[i];
     }
-    permutation[1] = Xor;
-    for(int i=1;i<=n;i++){
-        cout<<permutation[i]<<" ";
+    permu[1]=Xor;
+    if(n%2==0){
+        for(int i=2;i<=n-1;i++){
+            auto it = find(permu.begin()+(i+1),permu.end(),(permu[1]^permu[i]));
+            if(it != permu.end()){
+                swap(permu[1],permu[i]);
+                break;
+            }
+        }
     }
+    for(int i=1;i<=n;i++) cout<<permu[i]<<" ";
     nl
 }
 love{
