@@ -20,13 +20,13 @@
 #define Alamgir ios_base::sync_with_stdio(false), cin.tie(0),cout.tie(0);
 using namespace std;
 void solve(){
-    int b,g,x,y,n; cin>>b>>g>>x>>y>>n;
-    int l=1,r=imax,mid,ans=-1;
-    while(l<r){
+    ll b,g,x,y,n; cin>>b>>g>>x>>y>>n;
+    ll l=1,r=min(b/x + (b%x!=0),g/y + (g%y!=0)),mid,ans=-1;
+    while(l<=r){
         mid=(l+r)/2;
-        int mn_boys = mid*x,mn_girls = mid*y;
-        int aro_rakha_jabe = (n-(x+y))*mid;
-        int baki_ache = b+g-mn_boys-mn_girls;
+        ll mn_boys = mid*x,mn_girls = mid*y;
+        ll aro_rakha_jabe = (n-(x+y))*mid;
+        ll baki_ache = b+g-mn_boys-mn_girls;
         if(aro_rakha_jabe >= baki_ache && mn_boys <= b && mn_girls <= g){
             r=mid-1;
             ans=mid;
