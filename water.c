@@ -1,44 +1,18 @@
 #include<stdio.h>
-int main()
-{
-    int w;
-    scanf("%d",&w);
+int main(void){
+    int T;
+    scanf("%d", &T);
 
-    if(w<=2){
-        printf("NO\n");
+    for(T; T>0; T--){
+        int a, x, b, y;
+        scanf("%d %d %d %d", &a, &x, &b, &y);
+
+        if((a/x)>(b/y)){
+            printf("Alice\n");
+        }else if((a/x)==(b/y)){
+            printf("Bob\n");
+        }else{
+            printf("Equal\n");
+        }
     }
-    else if(w%2==0){
-        printf("YES\n");
-    }
-    else{
-        printf("NO\n");
-    }
-    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 6
-
-2 2 2 // case 1
-3 3// case 2
-
-n=8
-2 2 2 2 // case 1
-2 3 3 // case 2
-
-n=2 
-2 // case 1
-
-n=3 
-3 // case 1
