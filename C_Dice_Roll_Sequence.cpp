@@ -74,13 +74,12 @@ void solve(){
     vii a(n);
     for(int i=0;i<n;i++) cin>>a[i];
     int cnt=0;
-    for(int i=1;i<n-1;i++){
-        if(a[i] == (7%a[i-1]) || a[i-1] == (7%a[i]) || a[i] == (7%a[i+1]) || a[i+1] == (7%a[i])){
+    for(int i=0;i<n-1;i++){
+        if(a[i]==a[i+1] || a[i]+a[i+1]==7){
             cnt++;
             i++;
         }
     }
-    if(n==2 && (a[0]==(7%a[1]) || a[1]==(7%a[0]))) cnt=1;
     out(cnt)
 }
 love{
