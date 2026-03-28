@@ -1,7 +1,6 @@
 import pyautogui
 import time
 
-sentence = "Swarna tumi amare kobe nije theke message diba? bolo...."
 n = 100
 shayari = [
     "Kabhi kabhi kisi ka intezar bhi insaan ko khud se mila deta hai.",
@@ -16,10 +15,8 @@ shayari = [
     "Kabhi kabhi chup rehna bhi behtareen jawab hota hai."
 ]
 
-print("Place your cursor where you want to type...")
 time.sleep(5)
-
 for i in range(n):
-    pyautogui.write(shayari[i % len(shayari)])
+    pyautogui.write(shayari[i%len(shayari)])
     pyautogui.press("enter")
     time.sleep(0.1)
