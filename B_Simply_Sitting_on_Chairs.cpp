@@ -69,27 +69,22 @@ ll ncr(ll n, ll r)
     ll den = (factorial(r) * factorial(n - r)) % MOD;
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
-vector<bool> visited(100006, false);
-void setFalse(){
-    for(int i=0;i<100006;i++){
-        visited[i]=false;
-    }
-}
 void solve(){
     int n; cin>>n;
     vii a(n);
     for(int i=0;i<n;i++){
         cin>>a[i];
     }
-    setFalse();
-    int ans = 0;
+    vector<bool> visited(n+1, false);
+    int ans = 0, cnt = 0;
     for(int i=0;i<n;i++){
-        if(!visited[i+1]){
-            ans++;
-            visited[a[i]]=true;
-        }else if(visited[i+1]){
-            break;
+        if(a[i] > i+1){
+            visited[i+1] = true;
         }
+        if(visited[i+1]){
+            cnt++;
+        }
+        ans = max(ans, (i+1)-cnt);
     }
     out(ans)
 }
