@@ -69,35 +69,19 @@ ll ncr(ll n, ll r)
     ll den = (factorial(r) * factorial(n - r)) % MOD;
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
+
 void solve(){
     int x,y; cin>>x>>y;
-    ll modu = 676767677;
-    if(x==0 || y==0){
-        // x=max(x,y);
-        ll ans = 1;
-        for(int i=1;i<=max(x,y)/2;i++){
-            if(x%i==0) ans++;
-        }
-        ans%=modu;
-        out(ans)
-        for(int i=1;i<=max(x,y);i++){
-            if(x==0) cout<<-1<<" ";
-            else cout<<1<<" ";
-        }
-        nl;
-    }
-    else if((x==1 && y>=3) || (y==1 && x>=3)){
-        out(2)
-        for(int i=0;i<x;i++) cout<<1<<" ";
-        for(int i=0;i<y;i++) cout<<-1<<" ";
-        nl;
-    }
-    else{
-        out(1)
-        for(int i=0;i<x;i++) cout<<1<<" ";
-        for(int i=0;i<y;i++) cout<<-1<<" ";
-        nl;
-    }
+    int s=x-y;
+    vii a;
+    for(int i=0;i<x;i++) a.pb(1);
+    for(int i=0;i<y;i++) a.pb(-1);
+    int ans=0;
+    for(int i=1;i<=abs(s);i++) if(abs(s)%i==0) ans++;
+    if(s==0) ans=1;
+    out(ans)
+    for(auto x:a) cout<<x<<" ";
+    nl
 }
 love{
     Alamgir
