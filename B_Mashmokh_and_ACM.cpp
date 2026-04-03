@@ -71,38 +71,42 @@ ll ncr(ll n, ll r)
 }
 void solve(){
     int n,k; cin>>n>>k;
-    vii a(n),b(n);
-    for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<n;i++) cin>>b[i];
 
-    int mx=0,cnt=0;
-    set<int> st;
-    bool flag = false;
-    map<int,int> mp_a,mp_b;
-
-    vii missing_elements;
-    for(int i=0;i<k;i++){
-        mp_a[a[i]]++;
-        if(b[i] != -1) mp_b[b[i]]++;
-        if(mp_b[b[i]]>1) flag=true;
+    vii factors[n+1];
+    for(int i=1;i<=n;i++){
+        for(int j=1;j*j <= i; j++){
+            if(i%j == 0){
+                if(i/j != j){
+                    factors[i].pb(j);
+                    factors[i].pb(i/j);
+                }else factors[i].pb(j);
+            }
+        }
     }
 
-    for(int i=0;i<k;i++){
-        if(b[i] != -1 && mp_a.find(b[i]) == mp_a.end()) flag=true;
+    int dp[k+1][n+1];
+    for(int i=1;i<=n;i++) dp[1][i]=1;
+
+    for(int i=2;i<=k;i++){
+        for(int j=1;j<=n;j++){
+            dp[i][j]=0;
+            for(auto x:factors[j]){
+                dp[i][j] = (dp[i-1][x] + dp[i][j])%MOD;
+            }
+        }
     }
 
-    for(int i=k;i<n;i++){
-        out2(i-k,i)
-        if((b[i-k]==-1 && b[i]==-1) || ((b[i-k]!=-1 && b[i-k]==a[i-k]) && (b[i]==-1 || b[i]==a[i]))){}
-        else flag=true;
+    ll ans=0;
+    for(int i=1;i<=n;i++){
+        ans = (ans + dp[k][i])%MOD;
     }
+    out(ans)
 
-    (flag)? cout<<"NO\n" : cout<<"YES\n";
 }
 love{
     Alamgir
     int t=1; 
-    cin>>t;
+    // cin>>t;
     for(int i=1;i<=t;i++){
         solve();
     }

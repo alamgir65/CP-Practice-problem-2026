@@ -70,34 +70,18 @@ ll ncr(ll n, ll r)
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
 void solve(){
-    int n,k; cin>>n>>k;
-    vii a(n),b(n);
+    int n; cin>>n;
+    vii a(n);
     for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<n;i++) cin>>b[i];
-
-    int mx=0,cnt=0;
-    set<int> st;
-    bool flag = false;
-    map<int,int> mp_a,mp_b;
-
-    vii missing_elements;
-    for(int i=0;i<k;i++){
-        mp_a[a[i]]++;
-        if(b[i] != -1) mp_b[b[i]]++;
-        if(mp_b[b[i]]>1) flag=true;
+    for(int i=0;i<n;i++){
+        int big = 0, small = 0;
+        for(int j=i+1;j<n;j++){
+            if(a[j] > a[i]) big++;
+            else if(a[j] < a[i]) small++;
+        }
+        cout<<max(big,small)<<" ";
     }
-
-    for(int i=0;i<k;i++){
-        if(b[i] != -1 && mp_a.find(b[i]) == mp_a.end()) flag=true;
-    }
-
-    for(int i=k;i<n;i++){
-        out2(i-k,i)
-        if((b[i-k]==-1 && b[i]==-1) || ((b[i-k]!=-1 && b[i-k]==a[i-k]) && (b[i]==-1 || b[i]==a[i]))){}
-        else flag=true;
-    }
-
-    (flag)? cout<<"NO\n" : cout<<"YES\n";
+    nl
 }
 love{
     Alamgir
