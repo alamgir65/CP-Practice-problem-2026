@@ -72,23 +72,14 @@ ll ncr(ll n, ll r)
 void solve(){
     int n; cin>>n;
     vii a(n);
-    int x=0;
-    map<int,int> mp;
-    for(int i=0;i<n;i++) cin>>a[i],mp[a[i]]++;
-    
-    int frq[32]={0};
-    for(int i=0;i<n;i++){
-        if(mp[a[i]]%2){
-            for(int i=1;i<32;i++){
-                if(a[i] & (1 << i)) frq[i]++;
-            }
+    for(auto &it:a) cin>>it;
+    int ans = 0;
+    for(int i=0; i<n; i++){
+        for(int j=i+1; j<n; j++){
+            ans = max(ans,a[i]^a[j]);
         }
     }
-    for(int i=1;i<32;i++){
-        cout<<frq[i]<<" ";
-        if(frq[i]) x += 1<<i;
-    }
-    out(x)
+    out(ans)
 }
 love{
     Alamgir
