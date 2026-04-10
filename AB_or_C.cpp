@@ -36,6 +36,8 @@ void solve(){
     int covered = 0;
     ll ans = 2e9;
     int l = 0;
+
+    // gg
     
     for(int r=0;r<(int)vals.size();r++){
         int row = vals[r].second;
