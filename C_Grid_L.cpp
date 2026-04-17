@@ -70,35 +70,25 @@ ll ncr(ll n, ll r)
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
 void solve(){
-    long long p, q;
-    cin >> p >> q;
+    ll p,q; cin>>p>>q;
+    ll mx_n = sqrt(p + 2 * q) + 5;
 
-    long long s = p + 2LL * q;
-    long long x = 2LL * s + 1;
+    for(ll i=1; i <= mx_n; i++){
 
-    long long an = -1, am = -1;
+        if((p + 2*q - i) % (2*i + 1))
+            continue;
+        
+        ll m = (p + 2*q - i) / (2*i + 1);
+        if(i > m) continue;
 
-    for (long long d = 1; d * d <= x; d += 2) {
-        if (x % d == 0) {
-            long long e = x / d;
-            long long n = (d - 1) / 2;
-            long long m = (e - 1) / 2;
+        ll doubleUsable = i*(i+1) + (m - i)*i;
 
-            if (n > 0 && m > 0) {
-                if (q <= n * (m + 1)) {
-                    an = n;
-                    am = m;
-                    break;
-                }
-            }
+        if(q <= doubleUsable){
+            out2(i,m)
+            return;
         }
     }
-
-    if (an != -1) {
-        cout << an << " " << am << "\n";
-    } else {
-        cout << -1 << "\n";
-    }
+    out(-1)
 }
 love{
     Alamgir
