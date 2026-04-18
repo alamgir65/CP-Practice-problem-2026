@@ -69,9 +69,35 @@ ll ncr(ll n, ll r)
     ll den = (factorial(r) * factorial(n - r)) % MOD;
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
-void solve(){
-    int l,r; cin>>l>>r;
-    out(r-l+1)
+vector<vector<int>> v;
+vector<bool> vis;
+
+void dfs(int node) {
+    vis[node] = true;
+    for (auto x : v[node]) {
+        if (!vis[x]) {
+            dfs(x);
+        }
+    }
+}
+
+void solve() {
+    int n, m; cin >> n >> m;
+
+    v.assign(n+1, {});
+    vis.assign(n+1, false);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        v[a].push_back(b);
+    }
+    dfs(1);
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+        if (vis[i]) ans++;
+    }
+    cout << ans << '\n';
 }
 love{
     Alamgir

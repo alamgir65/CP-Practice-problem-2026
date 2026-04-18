@@ -70,8 +70,15 @@ ll ncr(ll n, ll r)
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
 void solve(){
-    int l,r; cin>>l>>r;
-    out(r-l+1)
+    int n,m; cin>>n>>m;
+    vii a(n);
+    map<int,int> mp;
+    for(auto &it:a) cin>>it,mp[it]++;
+    if(mp.size() == n){
+        (mp.size() == m) ? cout<<"Yes\nYes\n" : cout<<"Yes\nNo\n";
+    }else{
+        (mp.size() == m)? cout<<"No\nYes\n": cout<<"No\nNo\n";
+    }
 }
 love{
     Alamgir
