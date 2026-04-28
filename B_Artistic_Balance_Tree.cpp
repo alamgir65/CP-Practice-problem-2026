@@ -70,14 +70,30 @@ ll ncr(ll n, ll r)
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
 void solve(){
-    string s; cin>>s;
-    int cnt=0;
-    for(int i=1;i<s.size();i++){
-        if(s[i-1] == s[i]){
-            cnt++;
+    int n,m; cin>>n>>m;
+    vii odd,even;
+    for(int i=1;i<=n;i++){
+        int x; cin>>x;
+        if(i&1) odd.pb(x);
+        else even.pb(x);
+    }
+    sort(all(odd)), sort(all(even));
+    bool odd_marked = false, even_marked = false;
+    while(m--){
+        int x; cin>>x;
+        if(x&1){
+            if(!odd_marked || (!odd.empty() && odd.back() >= 0)){
+                odd_marked = true;
+                odd.pop_back();
+            }
+        }else{
+            if(!even_marked || (!even.empty() && even.back() >= 0)){
+                even_marked = true;
+                even.pop_back();
+            }
         }
     }
-    (cnt <= 2)? cout<<"YES\n":cout<<"NO\n";
+    out(accumulate(all(odd),0LL) + accumulate(all(even),0LL))
 }
 love{
     Alamgir

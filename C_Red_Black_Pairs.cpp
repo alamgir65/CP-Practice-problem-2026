@@ -70,14 +70,58 @@ ll ncr(ll n, ll r)
     return mp[{ n, r }] = (num * modinv(den)) % MOD;
 }
 void solve(){
-    string s; cin>>s;
-    int cnt=0;
-    for(int i=1;i<s.size();i++){
-        if(s[i-1] == s[i]){
-            cnt++;
+    int n; cin>>n;
+    string a,b; cin>>a>>b;
+    vector<vector<bool>> visited(2, vector<bool>(n, false));
+    for(int i=0;i<n;i++){
+        if(i == 0)
+        {
+            if(a[i] == b[i]){
+                visited[0][i] = visited[1][i] = true;
+            }
+            else if(i+1 < n && a[i] == a[i+1]){
+                visited[0][i] = visited[0][i+1] = true;
+            }
+            else if(i+1 < n && b[i] == b[i+1]){
+                visited[1][i] = visited[1][i+1] = true;
+            }
+        }
+        else if(i == n-1)
+        {
+            if(!visited[0][i] && !visited[1][i] && a[i] == b[i]){
+                visited[0][i] = visited[1][i] = true;
+            }
+            else if(i+1 < n && !visited[0][i] && !visited[0][i+1] && a[i] == a[i+1]){
+                visited[0][i] = visited[0][i+1] = true;
+            }
+            else if(i+1 < n && !visited[1][i] && !visited[1][i+1] && b[i] == b[i+1]){
+                visited[1][i] = visited[1][i+1] = true;
+            }
+        }
+        else{
+            if(!visited[0][i] && !visited[1][i] && a[i] == b[i]){
+                visited[0][i] = visited[1][i] = true;
+            }
+            else if(!visited[0][i] && !visited[0][i+1] && a[i] == a[i+1]){
+                visited[0][i] = visited[0][i+1] = true;
+            }
+            else if(!visited[0][i] && !visited[0][i-1] && a[i] == a[i-1]){
+                visited[0][i] = visited[0][i-1] = true;
+            }
+            else if(!visited[1][i] && !visited[1][i+1] && b[i] == b[i+1]){
+                visited[1][i] = visited[1][i+1] = true;
+            }
+            else if(!visited[1][i] && !visited[1][i-1] && b[i] == b[i-1]){
+                visited[1][i] = visited[1][i-1] = true;
+            }
         }
     }
-    (cnt <= 2)? cout<<"YES\n":cout<<"NO\n";
+    int ans = 0;
+    for(int i=0;i<n;i++){
+        ans += visited[0][i] == false;
+        ans += visited[1][i] == false;
+    }
+    out(ans/2)
 }
 love{
     Alamgir
